@@ -20,8 +20,5 @@ public class Recursion implements hw01{
 	    return helper(n, (n/guess + guess)/2);
 	}
     }
-    public double percentError(double n, double guess){
-	return Math.abs(n-(guess*guess)/n) * 100;
-    }
 
 }
