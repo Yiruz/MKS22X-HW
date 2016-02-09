@@ -14,7 +14,7 @@ public class Recursion implements hw01{
 	if(n==0){
 	    return 0;
 	}else
-	if(Math.abs((n-(guess*guess))/n) < 0.001){
+	if(Math.abs((n-(guess*guess))/n) < 0.0000001){
 	    return guess;
 	}else{
 	    return helper(n, (n/guess + guess)/2);
