@@ -23,6 +23,16 @@ public class QueenBoard{
      *Helper method fr solve. 
      */
     private boolean solveH(int col){
+	for(int r=0; r<board.length;r++){
+	    if(col==board.length-1){
+		return addQueen(r, col);
+	    }
+	    if(addQueen(r,col)){
+		return solveH(col+1);
+	    }else{
+		removeQueen(r,col);
+	    }
+	}
 	return false;
     }
 
@@ -86,11 +96,6 @@ public class QueenBoard{
     
     public static void main(String[]args){
     QueenBoard b = new QueenBoard(5);
-        System.out.println(b);
-	/*b.addQueen(3,0);
-	b.addQueen(0,1);
-        System.out.println(b);
-	b.removeQueen(3,0);*/
 	b.solve();
         System.out.println(b);
     }
