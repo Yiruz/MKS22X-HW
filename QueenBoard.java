@@ -23,14 +23,19 @@ public class QueenBoard{
      *Helper method fr solve. 
      */
     private boolean solveH(int col){
+	if(col==board.length){
+	    System.out.println("works");
+	    return true;
+	}
 	for(int r=0; r<board.length;r++){
-	    if(col==board.length-1){
-		return addQueen(r, col);
-	    }
 	    if(addQueen(r,col)){
-		return solveH(col+1);
-	    }else{
-		removeQueen(r,col);
+		addQueen(r,col);
+		System.out.println(toString());
+		if(solveH(col+1)){
+		    return true;
+		}else{
+		    removeQueen(r,col);
+		}
 	    }
 	}
 	return false;
@@ -95,7 +100,7 @@ public class QueenBoard{
     }
     
     public static void main(String[]args){
-    QueenBoard b = new QueenBoard(5);
+    QueenBoard b = new QueenBoard(3);
 	b.solve();
         System.out.println(b);
     }
