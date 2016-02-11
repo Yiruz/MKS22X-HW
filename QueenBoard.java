@@ -23,10 +23,6 @@ public class QueenBoard{
      *Helper method fr solve. 
      */
     private boolean solveH(int col){
-	if(col==board.length){
-	    System.out.println("works");
-	    return true;
-	}
 	for(int r=0; r<board.length;r++){
 	    if(addQueen(r,col)){
 		addQueen(r,col);
