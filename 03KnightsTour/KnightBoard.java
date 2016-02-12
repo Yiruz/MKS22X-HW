@@ -12,7 +12,59 @@ public class KnightBoard{
 		}
 	    }
 	}
+	}
+    /*public KnightBoard(int size){
+	board = new int[size][size];
+	}*/
+
+    public boolean solve(){
+	return solveH(2,2,1);
     }
+    public boolean solveH(int r, int c, int step){
+	if(step == board.length-4*board.length-4){
+	    return true;
+	}
+	if(board[r][c]!=0){
+	    
+	    return false;
+	}
+	board[r][c]=step;
+	System.out.println(toString());
+	if(solveH(r+2, c+1, step+1) ||
+	   solveH(r+2, c-1, step+1) ||
+	   solveH(r-2, c+1, step+1) ||
+	   solveH(r-2, c-1, step+1) ||
+	   solveH(r+1, c+2, step+1) ||
+	   solveH(r+1, c-2, step+1) ||
+	   solveH(r-1, c+2, step+1) ||
+	   solveH(r-1, c-2, step+1)){
+	    return true;
+	}else{
+	    return
+		solveH(r-2, c-1, step-1) ||
+		solveH(r-2, c+1, step-1) ||
+		solveH(r+2, c-1, step-1) ||
+		solveH(r+2, c+1, step-1) ||
+		solveH(r-1, c-2, step-1) ||
+		solveH(r-1, c+2, step-1) ||
+		solveH(r+1, c-2, step-1) ||
+		solveH(r+1, c+2, step-1);
+	}
+	
+	    }
+    public boolean upRight(int r, int c, int step){
+	if(board[r][c]!=0){
+	    return false;
+	}
+	board[r][c]=step;
+	return upRight(r+2, c-1, step-1);
+    }
+    /*public boolean solveH(int r, int c, int step){
+	if(step == board.length-4*board.length-4){
+	    return true;
+	}
+	return upRight(r, c, step);
+	}*/
 
     public String toString(){
 	String ans="";
