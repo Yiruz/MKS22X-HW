@@ -13,6 +13,18 @@ public class KnightBoard{
 	    }
 	}
     }
+    public KnightBoard(int rows, int cols){
+	board = new int [rows+4][cols+4];
+	for(int r=0; r<board.length; r++){
+	    for(int c=0; c<board[r].length; c++){
+		if(r<2 || r>board.length-3 || c<2 || c>board[r].length-3){
+		    board[r][c]=-1;
+		}else{
+		    board[r][c]=0;
+		}
+	    }
+	}
+    }
     /*public KnightBoard(int size){
 	board = new int[size][size];
 	}*/
@@ -48,19 +60,6 @@ public class KnightBoard{
 	return false;
 	}
     }
-    public boolean upRight(int r, int c, int step){
-	if(board[r][c]!=0){
-	    return false;
-	}
-	board[r][c]=step;
-	return upRight(r+2, c-1, step-1);
-    }
-    /*public boolean solveH(int r, int c, int step){
-	if(step == board.length-4*board.length-4){
-	    return true;
-	}
-	return upRight(r, c, step);
-	}*/
 
     public void printSolution(){
 	for(int r=2; r<board.length-2; r++){
