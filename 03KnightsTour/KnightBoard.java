@@ -62,15 +62,18 @@ public class KnightBoard{
 	return upRight(r, c, step);
 	}*/
 
-    public String toString(){
-	String ans="";
+    public void printSolution(){
 	for(int r=2; r<board.length-2; r++){
 	    for(int c=2; c<board[r].length-2; c++){
-		ans+=board[r][c]+"\t";
+		if(board[r][c]<10){
+		    System.out.print("0"+board[r][c]+"  ");
+		}else{
+		    System.out.print(board[r][c]+"  ");
+		}
 	    }
-	    ans+="\n";
+	    System.out.println();
 	}
-	return ans;
+	System.out.println();
     }
 
     
