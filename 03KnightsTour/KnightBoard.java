@@ -65,9 +65,9 @@ public class KnightBoard{
 	for(int r=2; r<board.length-2; r++){
 	    for(int c=2; c<board[r].length-2; c++){
 		if(board[r][c]<10){
-		    System.out.print("0"+board[r][c]+"  ");
+		    System.out.print("_"+board[r][c]+" ");
 		}else{
-		    System.out.print(board[r][c]+"  ");
+		    System.out.print(board[r][c]+" ");
 		}
 	    }
 	    System.out.println();
