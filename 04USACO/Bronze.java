@@ -5,7 +5,7 @@ public class Bronze{
     int[][]map;
     int row, col, elevation, n;
     Scanner in;
-    
+    int[][]command;
 
     public Bronze(){
 	map = new int[100][100];
@@ -21,6 +21,12 @@ public class Bronze{
 	for(int r=0; r<row; r++){
 	    for(int c=0; c<col; c++){
 		map[r][c] = in.nextInt();
+	    }
+	}
+	command = new int[n][3];
+	for(int i=0; i<n; i++){
+	    for(int j=0; j<3; j++){
+		command[i][j]=in.nextInt();
 	    }
 	}
     }
@@ -42,14 +48,27 @@ public class Bronze{
 	    }
 	}
     }
+    public void stomp(){
+	for(int i=0; i<n; i++){
+	    stomp(command[i][0], command[i][1], command[i][2]);
+	}
+    }
 
+    public void fill(){
+	for(int r=0; r<map.length; r++){
+	    for(int c=0; c<map[r].length; c++){
+		map[r][c] = elevation - map[r][c];
+		if(map[r][c]<0){
+		    map[r][c] = 0;
+		}
+	    }
+	}
+    }
     public int volume(){
 	int vol = 0;
 	for(int r=0; r<map.length; r++){
 	    for(int c=0; c<map[r].length; c++){
-		if(elevation-map[r][c] > 0){
-		    vol += elevation-map[r][c];
-		}
+		vol += map[r][c];
 	    }
 	}
 	vol = vol * 72 * 72;
@@ -57,7 +76,8 @@ public class Bronze{
     }
     public static void main(String[]args){
 	Bronze l = new Bronze();
-
+	
+	l.stomp();
 	System.out.println(l.volume()+",6,Zheng,Yiru");
     }
 
