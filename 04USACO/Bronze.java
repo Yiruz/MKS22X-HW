@@ -88,7 +88,7 @@ public class Bronze{
 	
 	l.stomp();
 	l.fill();
-	l.printBoard();
+	//l.printBoard();
 	System.out.println(l.volume()+",6,Zheng,Yiru");
     }
 
