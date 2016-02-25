@@ -27,22 +27,25 @@ public class Maze{
 	    int rows = 0;
 	    String line = input.nextLine();
 	    int cols = line.length();
-	    while(input.hasNextLine()){
+	    /*while(input.hasNextLine()){
 		line = input.nextLine();
 		for(int i=0; i<line.length(); i++){
 		    maze[rows][i] = line.charAt(i);
+		    System.out.print(maze[rows][i]);
 		}
 		rows+=1;
-	    }
-	    
+		System.out.println();
+		}*/
+
 	    maze = new char[rows][cols];
-	    /*for(int i=0; i<file.length(); i++){
+	    while(input.hasNext()){
 		for(int r=0; r<rows; r++){
 		    for(int c=0; c<cols; c++){
-			maze[r][c] = file.charAt(i);
+			line = input.next();
+			maze[r][c] = line.charAt(0);
 		    }
 		}
-		}*/
+	    }
 	}catch(FileNotFoundException e){
 	    System.out.println(filename+" does not exist!");
 	}
