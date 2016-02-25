@@ -23,20 +23,26 @@ public class Maze{
         //COMPLETE CONSTRUCTOR
 	try{
 	    File f = new File(filename);
-	    Scanner scan = new Scanner(f);
+	    Scanner input = new Scanner(f);
 	    int rows = 0;
-	    while(scan.hasNextLine()){
+	    String line = input.nextLine();
+	    int cols = line.length();
+	    while(input.hasNextLine()){
+		line = input.nextLine();
+		for(int i=0; i<line.length(); i++){
+		    maze[rows][i] = line.charAt(i);
+		}
 		rows+=1;
 	    }
-	    String line = scan.nextLine();
-	    int cols = line.length();
 	    
 	    maze = new char[rows][cols];
-	    for(int i=0; i<rows; i++){
-		for(int j=0; j<cols; j++){
-		    maze[i][j] = scan.next();
+	    /*for(int i=0; i<file.length(); i++){
+		for(int r=0; r<rows; r++){
+		    for(int c=0; c<cols; c++){
+			maze[r][c] = file.charAt(i);
+		    }
 		}
-	    }
+		}*/
 	}catch(FileNotFoundException e){
 	    System.out.println(filename+" does not exist!");
 	}
