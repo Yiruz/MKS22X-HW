@@ -24,26 +24,22 @@ public class Maze{
 	try{
 	    File f = new File(filename);
 	    Scanner scan = new Scanner(f);
-	    int rows = 0; 
-	    String line= "";
-	    while(scan.hasNextLine()){
-		line = scan.nextLine();
-		rows+=1;
-	    }
-	    int cols = line.length();
-
-	    Scanner file = new Scanner(f);
-	    maze = new char[rows][cols];
-	    String currentLine;
-	    for(int i=0; i<rows; i++){
-		currentLine = file.nextLine();
-		for(int j=0; j<cols; j++){
-		    maze[i][j] = currentLine.charAt(j);
-		}
-	    }
-	
 	}catch(FileNotFoundException e){
 	    System.out.println(filename+" does not exist!");
+	}
+
+	int rows = 0;
+	while(scan.hasNextLine()){
+	    rows+=1;
+	}
+	String line = scan.nextLine();
+	int cols = line.length();
+
+	maze = new char[rows][cols];
+	for(int i=0; i<rows; i++){
+	    for(int j=0; j<cols; j++){
+		maze[i][j] = scan.next();
+	    }
 	}
     }
 
@@ -84,18 +80,8 @@ public class Maze{
         }
 
         //COMPLETE SOLVE
-	if(maze[x+1][y]=='E' || maze[x-1][y]=='E' ||
-	   maze[x][y-1]=='E' || maze[x][y+1]=='E'){
-	    return true;
-	}
-	
-	maze[x][y] = '@';
-	if(solve(x+1, y) || solve(x-1, y) || solve(x, y+1) || solve(x, y-1)){
-	    return true;
-	}else{
-	    maze[x][y] = '.';
-	    return false; //so it compiles
-	}
+
+        return false; //so it compiles
     }
 
 
