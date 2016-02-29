@@ -25,7 +25,7 @@ public class Maze{
 	    File f = new File(filename);
 
 	    Scanner scan = new Scanner(f);
-	    rows = 0; 
+	    rows = 0;
 	    String line= "";
 	    while(scan.hasNextLine()){
 		line = scan.nextLine();
@@ -46,9 +46,11 @@ public class Maze{
 		    }
 		}
 	    }
+	    animate = ani;
 	
 	}catch(FileNotFoundException e){
 	    System.out.println(filename+" does not exist!");
+	    //System.exit(0);
 	}
     }
 
