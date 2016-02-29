@@ -5,6 +5,7 @@ public class Silver{
     private int[][]board1, board2;
     private int n, m, t;
     private int r1, c1, r2, c2;
+    private int s;
 
     public Silver(){
 	try{
@@ -35,5 +36,22 @@ public class Silver{
 	}
     }
 
+    public int solve(){
+	board1[r1][c1] = 1;
+	for(int i=0; i<t; i++){
+	    for(int r=0; r<n; r++){
+		for(int c=0; c<m; c++){
+		    board2[r][c] = board1[r+1][c] + board1[r-1][c] + 
+			board1[r][c+1] + board1[r][c-1];
+		}
+	    }
+	    for(int r=0; r<n; r++){
+		for(int c=0; c<m; c++){
+		    board1[r][c] = board2[r][c];
+		}
+	    }
+	}
+	return board1[r2][c2];
+    }
 
 }
