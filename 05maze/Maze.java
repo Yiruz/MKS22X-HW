@@ -34,15 +34,15 @@ public class Maze{
 	    cols = line.length();
 
 	    Scanner file = new Scanner(f);
-	    maze = new char[rows][cols];
+	    maze = new char[cols][rows];
 	    String currentLine;
 	    for(int i=0; i<rows; i++){
 		currentLine = file.nextLine();
 		for(int j=0; j<cols; j++){
-		    maze[i][j] = currentLine.charAt(j);
-		    if(maze[i][j]=='S'){
-			startx = i;
-			starty = j;
+		    maze[j][i] = currentLine.charAt(j);
+		    if(maze[j][i]=='S'){
+			startx = j;
+			starty = i;
 		    }
 		}
 	    }
@@ -50,7 +50,6 @@ public class Maze{
 	
 	}catch(FileNotFoundException e){
 	    System.out.println(filename+" does not exist!");
-	    //System.exit(0);
 	}
     }
 
