@@ -2,12 +2,12 @@ import java.util.*;
 import java.io.*;
 
 public class Maze{
-
-
+    
     private char[][]maze;
     private int startx,starty;
     private boolean animate;
-
+    private int rows,cols;
+    
     /*Constructor loads a maze text file.
       1. The file contains a rectangular ascii maze, made with the following 4 characters:
       '#' - locations that cannot be moved onto
@@ -23,24 +23,30 @@ public class Maze{
         //COMPLETE CONSTRUCTOR
 	try{
 	    File f = new File(filename);
+
 	    Scanner scan = new Scanner(f);
-	    int rows = 0; 
+	    rows = 0;
 	    String line= "";
 	    while(scan.hasNextLine()){
 		line = scan.nextLine();
 		rows+=1;
 	    }
-	    int cols = line.length();
+	    cols = line.length();
 
 	    Scanner file = new Scanner(f);
-	    maze = new char[rows][cols];
+	    maze = new char[cols][rows];
 	    String currentLine;
 	    for(int i=0; i<rows; i++){
 		currentLine = file.nextLine();
 		for(int j=0; j<cols; j++){
-		    maze[i][j] = currentLine.charAt(j);
+		    maze[j][i] = currentLine.charAt(j);
+		    if(maze[j][i]=='S'){
+			startx = j;
+			starty = i;
+		    }
 		}
 	    }
+	    animate = ani;
 	
 	}catch(FileNotFoundException e){
 	    System.out.println(filename+" does not exist!");
@@ -82,23 +88,31 @@ public class Maze{
             System.out.println(this);
             wait(20);
         }
-
-        //COMPLETE SOLVE
-	if(maze[x+1][y]=='E' || maze[x-1][y]=='E' ||
-	   maze[x][y-1]=='E' || maze[x][y+1]=='E'){
-	    return true;
-	}
 	
-	maze[x][y] = '@';
-	if(solve(x+1, y) || solve(x-1, y) || solve(x, y+1) || solve(x, y-1)){
+        //COMPLETE SOLVE
+	if(maze[x][y]=='E'){
 	    return true;
-	}else{
-	    maze[x][y] = '.';
-	    return false; //so it compiles
 	}
+	if(maze[x][y]==' '){
+	    maze[x][y] = '@';
+	    if((isValid(x+1, y) && solve(x+1, y)) || 
+	       (isValid(x-1, y) && solve(x-1, y)) || 
+	       (isValid(x, y+1) && solve(x, y+1)) || 
+	       (isValid(x, y-1) && solve(x, y-1))){
+		return true;
+	    }
+	}
+	maze[x][y] = '.';
+	return false; //so it compiles
     }
+    
 
-
+    public boolean isValid(int x, int y){
+	if(maze[x][y]=='#' || maze[x][y]=='.' || maze[x][y]=='@'){
+	    return false;
+	}
+	return true;
+    }
 
     //FREE STUFF!!! *you should be aware of this*
 
