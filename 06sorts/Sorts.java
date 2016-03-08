@@ -69,8 +69,13 @@ public class Sorts{
 	}
 	return newAry;
     }
-    public static void mergeSort(int[]data){
-	
+    public static void mergesort(int[]data,int left,int right){
+	if(data,length == 1){
+	    
+	}
+	mergesort(data,0,);
+	mergesort();
+	merge();
     }
 
 
