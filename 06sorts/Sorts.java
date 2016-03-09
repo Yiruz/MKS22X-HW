@@ -49,41 +49,46 @@ public class Sorts{
 	}
     }
   
-
-    //merge sort
-    public static int[] merge(int[]aryA, int[]aryB){
-	int[]newAry = new int[aryA.length + aryB.length];
-	int a = 0;
-	int b = 0;
-	int i = 0;
-	while(aryA.length>0 && aryB.length>0){
-	    if(aryA[a] >= aryB[b]){
-		newAry[i] = aryA[a];
-		i+=1;
-		a+=1;
+    //merge sort-------------------------------------------
+    public static void merge(int[]data,int startA,int endA,int startB,int endB){
+	int[]copy = new int[endB-startA+1];
+	int ind = 0;
+	int s = startA;
+	while(startA<=endA && startB<=endB){
+	    if(data[startA]<=data[startB]){
+		copy[ind] = data[startA];
+		startA++;
+		ind++;
 	    }else{
-		newAry[i] = aryB[b];
-		i+=1;
-		b+=1;
+		copy[ind] = data[startB];
+		startB++;
+		ind++;
 	    }
 	}
-	return newAry;
+	for(int i=0;i<copy.length;i++){
+	    data[s] = copy[i];
+	    s++;
+	}
     }
     public static void mergesort(int[]data,int left,int right){
-	if(data,length == 1){
-	    
+	if(left<right){
+	    mergesort(data,left,(left+right)/2-1);
+	    mergesort(data,(left+right)/2,right);
+	    merge(data,left,(left+right)/2-1,(left+right)/2,right);
 	}
-	mergesort(data,0,);
-	mergesort();
-	merge();
     }
+    public static void mergesort(int[]data){
+	mergesort(data,0,data.length-1);
+    }
+	
 
 
     public static void main(String[]args){
-	int[]a = {0, -12, 43, 4};
-	int[]b = {0, 12, 5, -6};
-	//merge(a,b);
-	System.out.println(merge(a,b));
+	int[]a = {0, -12, 43, 4, 3, 57, 7};
+	int[]b = {0, 12, 5, -6, 8, -2};
+	System.out.println(Arrays.toString(a));
+	mergesort(a);
+	System.out.println(Arrays.toString(a));
 
 	/*int[]data=new int[5];
 	for(int i=0;i<data.length;i++){
