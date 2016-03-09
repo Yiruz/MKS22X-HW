@@ -65,6 +65,16 @@ public class Sorts{
 		ind++;
 	    }
 	}
+	while(startA<=endA){
+	    copy[ind] = data[startA];
+	    startA++;
+	    ind++;
+	}
+	while(startB<=endB){
+	    copy[ind] = data[startB];
+	    startB++;
+	    ind++;
+	}
 	for(int i=0;i<copy.length;i++){
 	    data[s] = copy[i];
 	    s++;
@@ -88,6 +98,7 @@ public class Sorts{
 	int[]b = {0, 12, 5, -6, 8, -2};
 	System.out.println(Arrays.toString(a));
 	mergesort(a);
+	//merge(a,0,3,4,6);
 	System.out.println(Arrays.toString(a));
 
 	/*int[]data=new int[5];
