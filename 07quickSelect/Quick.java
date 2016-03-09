@@ -49,7 +49,9 @@ public class Quick{
 	System.out.println(s);
     }
 
-
+    public static String name(){
+	return "6,Zheng,Yiru";
+    }
     /*public static void main(String[]args){
 	int[]data={-3,2,5,9,3,-5,34,0};
 	print(data);
