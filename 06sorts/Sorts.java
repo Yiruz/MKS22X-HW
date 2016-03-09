@@ -91,9 +91,7 @@ public class Sorts{
 	mergesort(data,0,data.length-1);
     }
 	
-
-
-    public static void main(String[]args){
+    /*public static void main(String[]args){
 	int[]a = {0, -12, 43, 4, 3, 57, 7};
 	int[]b = {0, 12, 5, -6, 8, -2};
 	System.out.println(Arrays.toString(a));
@@ -101,7 +99,7 @@ public class Sorts{
 	//merge(a,0,3,4,6);
 	System.out.println(Arrays.toString(a));
 
-	/*int[]data=new int[5];
+	int[]data=new int[5];
 	for(int i=0;i<data.length;i++){
 	    data[i]=(int)(Math.random()*100-50);
 	}
@@ -113,7 +111,7 @@ public class Sorts{
 	bubbleSort(data);
 	System.out.println(Arrays.toString(data));
 	selectionSort(copy);
-	System.out.println(Arrays.toString(data));*/
+	System.out.println(Arrays.toString(data));
 	
-	}
+	}*/
 }
