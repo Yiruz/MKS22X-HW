@@ -38,7 +38,14 @@ public class Quick{
 	}
 	return val;
     }
-
+    public static void quickSort(int[]data){
+    }
+    public static void quickSort(int[]data,int left,int right){
+	int ind = partition(data,left,right);
+	if(left>right){
+	    quickSort();
+	}
+    }
 
     public static void print(int[]data){
 	String s = "[";
