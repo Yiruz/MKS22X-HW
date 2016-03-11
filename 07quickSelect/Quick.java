@@ -39,11 +39,13 @@ public class Quick{
 	return val;
     }
     public static void quickSort(int[]data){
+	quickSort(data,0,data.length-1);
     }
     public static void quickSort(int[]data,int left,int right){
-	int ind = partition(data,left,right);
-	if(left>right){
-	    quickSort();
+	if(left<right){
+	    int ind = partition(data,left,right);
+	    quickSort(data,ind+1,right);
+	    quickSort(data,left,ind-1);
 	}
     }
 
@@ -59,10 +61,12 @@ public class Quick{
     public static String name(){
 	return "6,Zheng,Yiru";
     }
-    /*public static void main(String[]args){
+    public static void main(String[]args){
 	int[]data={-3,2,5,9,3,-5,34,0};
+	//print(data);
+	//System.out.println(quickselect(data,0));
 	print(data);
-	System.out.println(quickselect(data,4));
+	quickSort(data);
 	print(data);
-	}*/
+    }
 }
