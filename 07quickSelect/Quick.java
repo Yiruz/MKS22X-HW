@@ -52,49 +52,41 @@ public class Quick{
     //***************************************************
 
     //new************************************************
-    private static int[] partition(int[]data, int left, int right){
+    public static int[] partition(int[]data,int left,int right){
 	int ind = (int)(Math.random()*(right-left+1))+left;
-	int count = 1;
-        int element = data[ind];
-	//data[ind] = data[right];
-	//data[right] = element;
+	//System.out.println(ind);                                              	//int element = data[ind];
+	int element = data[ind];
+	swap(data,ind,right);
 	int i = left;
-	int j = right;
-	while(i <= j){
-	    if(data[i] == element){
-		count++;
-	    }else if(data[i] > element){
-		swap(data, i, j);
+	int j = right-1;
+	while(i < j){
+	    if(data[i]<element){
+		i++;
+	    }else{
+		swap(data,i,j);
 		j--;
-	    }else if(data[i] < element){
+	    }
+	}
+	if(data[i]<element){
+	    i++;
+	    swap(data,i,right);
+	}else{
+	    swap(data,i,right);
+	}
+	int[]par = new int[2];
+	par[0] = i;
+	par[1] = i;
+	int val = data[i];
+	for(int s=i; s<right; s++){
+	    if(data[s]==val){
+		swap(data,s,i);
 		i++;
 	    }
 	}
-        int[]par = new int[2];
-	par[0] = i;
-	par[1] = j;
-	//System.out.println(data[i]+", "+data[j]);
-	//System.out.println(par);
+
 	return par;
     }
-    /*public static int quickselect(int[]data, int k){
-	//System.out.println("k = "+k);
-	return quickselect(data,k,0,data.length-1);
-    }
-    public static int quickselect(int[]data,int k,int left,int right){
-	int[] ind = partition(data,left,right);
-	int leftInd = ind[0];
-	int rightInd = ind[1];
-	int val = 0;
-	if(k > ind[0] && k < ind[1]){
-	    val = data[k];
-	}else if(k > ind[1]){
-	    val = quickselect(data,k,ind[1]+1,right);
-	}else if(k < ind[0]){
-	    val = quickselect(data,k,left,ind[0]-1);
-	}
-	return val;
-	}*/
+    
     public static void quickSort(int[]data){
 	quickSort(data,0,data.length-1);
     }
@@ -124,7 +116,7 @@ public class Quick{
     public static String name(){
 	return "6,Zheng,Yiru";
     }
-    public static void main(String[]args){
+    /*public static void main(String[]args){
 	int[]data = new int[400000];
 	for(int i=0; i<data.length; i++){
 	    data[i] = (int)(Math.random()*5)-3;
@@ -137,12 +129,18 @@ public class Quick{
 	//System.out.println(partition(data, 0, data.length-1));
 	print(a);
 	quickSort(a);
+	print(a);
+	System.out.println("-----------------");
 	print(b);
 	quickSort(b);
+	print(b);
+	System.out.println("-----------------");
 	print(c);
 	quickSort(c);
+	print(c);
+	System.out.println("-----------------");
 	print(d);
 	quickSort(d);
-	//print(data);
-    }
+	print(d);
+	}*/
 }
