@@ -66,7 +66,15 @@ public class MyLinkedList{
 	}
 	return cur.getData();
     }
-    
+    public int set(int index,int newValue){
+	LNode cur = start;
+	while(index > 0){
+	    cur = cur.getNext();
+	    index--;
+	}
+	cur.setData(newValue);
+	return cur.getData();
+    }
 
     public static void main(String[]args){
 	MyLinkedList m = new MyLinkedList();
