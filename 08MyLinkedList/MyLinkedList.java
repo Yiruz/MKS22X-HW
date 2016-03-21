@@ -42,6 +42,35 @@ public class MyLinkedList{
 	size+=1;
 	return true;
     }
+    /* public boolean add(int index, int value){
+	if(index>=size){
+	    //throw indexOutOfBoundsException;
+	}else{
+	    LNode head = start;
+	    while(index > 0){
+		head = head.getNext();
+		index--;
+	    }
+	    LNode val = new LNode(value);
+	    
+	    return true;
+	}
+    }
+    public int remove(int index){
+	return 0;
+	}*/
+    public int indexOf(int value){
+	LNode head = start;
+	int index = 0;
+        if(index == size){
+	    return -1;
+	}
+	while(start.getData() != value){
+	    start = start.getNext();
+	    index+=1;
+	}
+	return index;
+    }
     public String toString(){
 	String s = "[";
 	LNode current = start;
@@ -82,9 +111,12 @@ public class MyLinkedList{
 	m.add(6);
 	m.add(5);
 	m.add(23);
-	m.add(9);
+        m.add(9);
 	System.out.println(m);
 	System.out.println(m.get(2));
+	m.set(1,0);
+	System.out.println(m);
+
 
     }
 
