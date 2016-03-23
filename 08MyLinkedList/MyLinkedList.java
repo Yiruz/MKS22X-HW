@@ -1,4 +1,12 @@
-public class MyLinkedList<T>{
+public class MyLinkedList<T> /*implements Iterable<T>*/{
+    /*
+      public class x implements Iterator<T>{
+      LNode current;
+      }
+      public Iterator<T> iterator(){
+      return new x();
+      }
+     */
     private class LNode<T>{
 	T data;
 	LNode next;
@@ -43,8 +51,8 @@ public class MyLinkedList<T>{
 	return true;
     }
     public boolean add(int index, T value){
-	if(index>=size){
-	    //throw new indexOutOfBoundsException();
+	if(index > size() || index < 0){
+	    throw new indexOutOfBoundsException();
 	}else if(index == 0){
 	    start = new LNode<T>(value);
 	}else{
@@ -53,7 +61,9 @@ public class MyLinkedList<T>{
 		head = head.getNext();
 	    }
 	    LNode<T> val = new LNode<T>(value);
-	
+	    val.setNext(head.getNext());
+	    head.setNext(val);
+	    size++;
 	    return true;
 	}
 	return false;
@@ -91,7 +101,7 @@ public class MyLinkedList<T>{
     }
     public T get(int index){
 	LNode<T> cur = start;
-	if(index<0 || index >=size){
+	if(index<0 || index >=size()){
 	    throw new IndexOutOfBoundsException();
 	}
 	while(index > 0){
@@ -102,6 +112,9 @@ public class MyLinkedList<T>{
     }
     public T set(int index,T newValue){
 	LNode<T> cur = start;
+	if(index<0 || index >= size()){
+	    
+	}
 	while(index > 0){
 	    cur = cur.getNext();
 	    index--;
