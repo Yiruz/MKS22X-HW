@@ -136,6 +136,22 @@ public class MyLinkedList<T> implements Iterable<T>{
 	s+="]";
 	return s;
     }
+    public String toString(boolean b){
+	String ret = "size is " + size();
+	if(b == true){
+	    ret += "[";
+	    LNode current = start;
+	    while(current != null){
+		ret += current.getData();
+		if(current.getNext()!=null){
+		    ret += ", ";
+		}
+		current = current.getNext();
+	    }
+	    ret+="]";
+	}
+	return ret;
+    }
     public int size(){
 	return size;
     }
@@ -153,7 +169,7 @@ public class MyLinkedList<T> implements Iterable<T>{
     public T set(int index,T newValue){
 	LNode cur = start;
 	if(index<0 || index >= size()){
-	    
+	    throw new IndexOutOfBoundsException();
 	}
 	while(index > 0){
 	    cur = cur.getNext();
