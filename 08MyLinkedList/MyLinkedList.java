@@ -1,24 +1,31 @@
-public class MyLinkedList<T> /*implements Iterable<T>*/{
-    /*
-      public class iter implements Iterator<T>{
-      private LNode next;
-      public iter(){next = head;}
-      public boolean hasNext(){return next != null;}
-      public T next(){
-      if(!hasNext()){
-      throw new 
-      }
-      T ans = next.getData();
-      next = next.getNext();
-      return ans;}
-      public void remove(){
-      throw new UnsupportedOperationException();
-      }
-      }
-      public Iterator<T> iterator(){
-      return new iter();
-      }
-     */
+import java.util.*;
+
+public class MyLinkedList<T> implements Iterable<T>{
+    
+    public class iter implements Iterator<T>{
+	private LNode next;
+	public iter(){
+	    next = start;
+	}
+	public boolean hasNext(){
+	    return next != null;
+	}
+	public T next(){
+	    if(!hasNext()){
+		throw new NoSuchElementException();
+	    }
+	    T ans = next.getData();
+	    next = next.getNext();
+	    return ans;
+	}
+	public void remove(){
+	    throw new UnsupportedOperationException();
+	}
+    }
+    public Iterator<T> iterator(){
+	return new iter();
+    }
+    
     private class LNode{
 	T data;
 	LNode next;
@@ -84,20 +91,37 @@ public class MyLinkedList<T> /*implements Iterable<T>*/{
 	}
 	return false;
     }
-    /*public int remove(int index){
-	return 0;
-	}*/
-    public int indexOf(T value){
-	LNode head = start;
-	int index = 0;
-        if(index == size){
-	    return -1;
-	}
-	while(start.getData() != value){
+    public T remove(int index){
+        if(index > size() || index < 0){
+            throw new IndexOutOfBoundsException();
+        }
+        LNode head = start;
+        T value = null;
+        if(index == 0){
+	    value = head.getData();
 	    start = start.getNext();
-	    index+=1;
-	}
-	return index;
+        }else{
+            for(int i=0; i<index-1; i++){
+                head = head.getNext();
+            }
+            value = head.getNext().getData();
+            head.setNext(head.getNext().getNext());
+        }
+        size--;
+        return value;
+    }
+    public int indexOf(T value){
+        LNode head = start;
+        int index = 0;
+        while(head != null){
+            if(head.getData() == value){
+                return index;
+            }else{
+                head = head.getNext();
+                index+=1;
+            }
+        }
+        return -1;
     }
     public String toString(){
 	String s = "[";
