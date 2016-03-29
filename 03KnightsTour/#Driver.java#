@@ -1,0 +1,8 @@
+public class Driver{
+    public static void main(String[]args){
+	KnightBoard b = new KnightBoard(4);
+
+	b.solve();
+	System.out.println(b);
+    }
+}

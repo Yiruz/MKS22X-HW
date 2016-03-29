@@ -33,11 +33,12 @@ public class Maze{
 	    int cols = line.length();
 
 	    Scanner file = new Scanner(f);
-	    maze = new char[rows][cols];
+	    maze = new char[cols][rows];
 	    String currentLine;
-	    for(int i=0; i<rows; i++){
+	    for(int i=0; i<cols; i++){
+
+		for(int j=0; j<rows; j++){
 		currentLine = file.nextLine();
-		for(int j=0; j<cols; j++){
 		    maze[i][j] = currentLine.charAt(j);
 		}
 	    }
@@ -84,12 +85,15 @@ public class Maze{
         }
 
         //COMPLETE SOLVE
-	if(maze[x+1][y]=='E' || maze[x-1][y]=='E' ||
-	   maze[x][y-1]=='E' || maze[x][y+1]=='E'){
+	if(maze[x][y]=='E'){
 	    return true;
 	}
-	if(maze[x+1][y]=='E' || maze[x-1][y]=='E' ||
-	   maze[x][y-1]=='E' || maze[x][y+1]=='E'){
+	if(maze[x][y]=='#'){
+	    return false;
+	}
+	if(maze[x][y]=='.'){
+	    return false;
+	}
 	
 	maze[x][y] = '@';
 	if(solve(x+1, y) || solve(x-1, y) || solve(x, y+1) || solve(x, y-1)){
