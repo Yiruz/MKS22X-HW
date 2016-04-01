@@ -1,4 +1,4 @@
-public class MyDeque{
+public class MyDeque<T>{
     private Object[] data;
     private int start, end;
     private int size;
@@ -20,13 +20,15 @@ public class MyDeque{
 	end = size-1;
 	return newAry;
     }
-    public void addFirst(Object value){
+    public void addFirst(T value){
 	if(size == 0){
 	    data[0] = value;
 	    start = 0;
 	    end = 0;
 	}else if(size == data.length){
-	    
+	    resize(data);
+	    data[data.length-1] = value;
+	    start = data.length-1;
 	}else if(start == 0){
 	    data[data.length-1] = value;
 	    start = data.length-1;
@@ -36,6 +38,21 @@ public class MyDeque{
 	}
 	size++;
     }
+    public void addLast(T value){
+	if(size == 0){}
+    }
 
+    public String toString(){
+	String result = "[";
+	for(int i=0; i<size; i++){
+	    if(start == data.length-1){
+		start 
+	    }
+	}
+    }
 
+    public static void main(String[]args){
+	MyDeque d = new MyDeque();
+	
+    }
 }
