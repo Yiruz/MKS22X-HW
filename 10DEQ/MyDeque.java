@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class MyDeque<T>{
     private Object[] data;
     private int start, end;
@@ -52,6 +54,33 @@ public class MyDeque<T>{
 	size++;
     }
 
+    public Object removeFirst(){
+	if(size == 0){
+	    throw new NoSuchElementException();
+	}
+	Object temp = data[start];
+	if(start == data.length-1){
+	    start = 0;
+	}else{
+	    start++;
+	}
+	size--;
+	return temp;
+    }
+    public Object removeLast(){
+	if(size == 0){
+	    throw new NoSuchElementException();
+	}
+	Object temp = data[end];
+	if(end == 0){
+	    end = data.length-1;
+	}else{
+	    end--;
+	}
+	size--;
+	return temp;
+    }
+    
     
 
     public String toString(){
