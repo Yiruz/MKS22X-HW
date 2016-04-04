@@ -1,17 +1,18 @@
 import java.util.*;
 
 public class MyDeque<T>{
-    private Object[] data;
+    private T[] data;
     private int start, end;
     private int size;
 
+    //@SuppressWarnings("unchecked")
     public MyDeque(){
-	data = new Object[10];
+	data = (T[])new Object[10];
 	size = 0;
     }
 
     public void resize(){
-	Object[] temp = new Object[data.length * 2];
+	T[] temp = (T[])new Object[data.length * 2];
 	for(int i=0; i<size; i++){
 	    if(start == data.length-1){
 		start = 0;
@@ -54,11 +55,11 @@ public class MyDeque<T>{
 	size++;
     }
 
-    public Object removeFirst(){
+    public T removeFirst(){
 	if(size == 0){
 	    throw new NoSuchElementException();
 	}
-	Object temp = data[start];
+	T temp = data[start];
 	if(start == data.length-1){
 	    start = 0;
 	}else{
@@ -67,11 +68,11 @@ public class MyDeque<T>{
 	size--;
 	return temp;
     }
-    public Object removeLast(){
+    public T removeLast(){
 	if(size == 0){
 	    throw new NoSuchElementException();
 	}
-	Object temp = data[end];
+	T temp = data[end];
 	if(end == 0){
 	    end = data.length-1;
 	}else{
@@ -81,7 +82,18 @@ public class MyDeque<T>{
 	return temp;
     }
     
-    
+    public T getFirst(){
+	if(size == 0){
+	    throw new NoSuchElementException();
+	}
+	return data[start];
+    }
+    public T getLast(){
+	if(size == 0){
+	    throw new NoSuchElementException();
+	}
+	return data[end];
+    }
 
     public String toString(){
 	String result = "[";
