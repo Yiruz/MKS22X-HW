@@ -8,51 +8,64 @@ public class MyDeque<T>{
 	size = 0;
     }
 
-    public Object[] resize(Object[] data){
-	Object[] newAry = new Object[data.length * 2];
+    public void resize(){
+	Object[] temp = new Object[data.length * 2];
 	for(int i=0; i<size; i++){
 	    if(start == data.length-1){
 		start = 0;
 	    }
-	    newAry[i] = data[start];
+	    temp[i] = data[start+i];
 	}
+	data = temp;
 	start = 0;
 	end = size-1;
-	return newAry;
+	size *= 2;
     }
     public void addFirst(T value){
+	if(size == data.length){
+	    resize();
+	}	
 	if(size == 0){
-	    data[0] = value;
 	    start = 0;
 	    end = 0;
-	}else if(size == data.length){
-	    resize(data);
-	    data[data.length-1] = value;
-	    start = data.length-1;
 	}else if(start == 0){
-	    data[data.length-1] = value;
 	    start = data.length-1;
 	}else{
-	    data[start-1] = value;
 	    start--;
 	}
+	data[start] = value;
 	size++;
     }
     public void addLast(T value){
-	if(size == 0){}
+	if(size == data.length){
+	    resize();
+	}
+	if(size == 0){
+	    start = 0;
+	    end = 0;
+	}else if(end == data.length-1){
+	    end = 0;
+	}else{
+	    end++;
+	}
+	data[end] = value;
+	size++;
     }
+
+    
 
     public String toString(){
 	String result = "[";
 	for(int i=0; i<size; i++){
-	    if(start == data.length-1){
-		start 
+	    if(start == data.length){
+		start = 0;
+	    }
+	    result += i;
+	    if(i < size-1){
+		result +=",";
 	    }
 	}
+	return result+"]";
     }
 
-    public static void main(String[]args){
-	MyDeque d = new MyDeque();
-	
-    }
 }
