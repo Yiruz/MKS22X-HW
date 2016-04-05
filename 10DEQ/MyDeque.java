@@ -5,13 +5,13 @@ public class MyDeque<T>{
     private int start, end;
     private int size;
 
-    //@SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")
     public MyDeque(){
 	data = (T[])new Object[10];
 	size = 0;
     }
-
-    public void resize(){
+    @SuppressWarnings("unchecked")
+    private void resize(){
 	T[] temp = (T[])new Object[data.length * 2];
 	for(int i=0; i<size; i++){
 	    if(start == data.length-1){
@@ -97,16 +97,18 @@ public class MyDeque<T>{
 
     public String toString(){
 	String result = "[";
+	int count = start;
 	for(int i=0; i<size; i++){
-	    if(start == data.length){
-		start = 0;
+	    if(count == data.length){
+		count = 0;
 	    }
-	    result += i;
+	    result += data[i];
 	    if(i < size-1){
 		result +=",";
 	    }
 	}
-	return result+"]";
+	return result+"] start="+start+" end="+end;
     }
+
 
 }
