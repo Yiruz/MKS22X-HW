@@ -110,8 +110,8 @@ public class MyDeque<T>{
 	    }
 	    count++;
 	}
-	System.out.println("start="+start+"["+data[start]+"]");
-	System.out.println("end="+end+"["+data[end]+"]");
+	//System.out.println("start="+start+"["+data[start]+"]");
+	//System.out.println("end="+end+"["+data[end]+"]");
 	return result+"]";
     }
 
