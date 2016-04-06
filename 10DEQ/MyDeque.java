@@ -99,15 +99,20 @@ public class MyDeque<T>{
 	String result = "[";
 	int count = start;
 	for(int i=0; i<size; i++){
-	    if(count == data.length){
+	    if(count == data.length-1){
+		result += data[count]+",";
 		count = 0;
+		i++;
 	    }
-	    result += data[i];
+	    result += data[count];
 	    if(i < size-1){
 		result +=",";
 	    }
+	    count++;
 	}
-	return result+"] start="+start+" end="+end;
+	System.out.println("start="+start+"["+data[start]+"]");
+	System.out.println("end="+end+"["+data[end]+"]");
+	return result+"]";
     }
 
 
