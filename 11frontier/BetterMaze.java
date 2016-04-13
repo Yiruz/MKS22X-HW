@@ -103,11 +103,12 @@ public class BetterMaze{
 		placesToGo.add(n);
 		n.setPrev(head);
 	    }
+	    maze[row][col] = '.';
 	}
 	return false;
     }    
      
-    private boolean moveable(int row, int col){
+    private boolean moveable(int col, int row){
 	char c = maze[row][col];
 	return c == ' ' || c == 'E';
     }
