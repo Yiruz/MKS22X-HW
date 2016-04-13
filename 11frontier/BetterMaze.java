@@ -1,26 +1,29 @@
+import java.util.*;
+import java.io.*;
+
 public class BetterMaze{
 
     //node class
     public class Node{
 	int[] xy;
-	Node from;
+	Node prev;
 
 	public Node(int x,int y){
 	    xy = new int[2];
 	    xy[0] = x;
 	    xy[1] = y;
 	}
-	public Node(int x, int y, Node from){
+	public Node(int x, int y, Node p){
 	    xy = new int[2];
 	    xy[0] = x;
 	    xy[1] = y;
-	    this.from = from;
+	    prev = p;
 	}
 	public void setPrev(Node n){
 	    prev = n;
 	}
 	public Node getPrev(){
-	    return from;
+	    return prev;
 	}
 	public int getRow(){
 	    return xy[1];
@@ -52,16 +55,18 @@ public class BetterMaze{
     /**initialize the frontier as a queue and call solve
     **/
     public boolean solveBFS(){  
-        /** IMPLEMENT THIS **/      
-	return false;
+        /** IMPLEMENT THIS **/  
+	placesToGo = new FrontierQueue<Node>();
+	return solve();
     }   
 
 
    /**initialize the frontier as a stack and call solve
     */ 
     public boolean solveDFS(){  
-        /** IMPLEMENT THIS **/  
-	return false;
+        /** IMPLEMENT THIS **/
+	placesToGo = new FrontierStack<Node>();
+	return solve();
     }    
 
    /**Search for the end of the maze using the frontier. 
@@ -69,36 +74,41 @@ public class BetterMaze{
     **/
     private boolean solve(){  
         /** IMPLEMENT THIS **/
-	int row = startRow;
-	int col = startCol;
-	Node head = new Node(col, row);
-	if(maze[row][col] == 'E'){
-	    return true;
+	Node start = new Node(startCol,startRow);
+	placesToGo.add(start);
+	while(placesToGo.hasNext()){
+	    Node head = placesToGo.next();
+	    int row = head.getRow();
+	    int col = head.getCol();
+	    if(maze[row][col] == 'E'){
+		return true;
+	    }
+	    if(moveable(col+1,row)){
+		Node n = new Node(col+1,row);
+		placesToGo.add(n);
+		n.setPrev(head);
+	    }
+	    if(moveable(col-1,row)){
+		Node n = new Node(col-1,row);
+		placesToGo.add(n);
+		n.setPrev(head);
+	    }
+	    if(moveable(col,row-1)){
+		Node n = new Node(col,row-1);
+		placesToGo.add(n);
+		n.setPrev(head);
+	    }
+	    if(moveable(col,row+1)){
+		Node n = new Node(col,row+1);
+		placesToGo.add(n);
+		n.setPrev(head);
+	    }
 	}
-
-	if(moveable(col+1,row+1)){
-	    maze[row][col] = '.';
-	    row += 1;
-	    col += 1;
-	}
-	if(moveable(col-1,row+1)){
-	    maze[row][col] = '.';
-	    row += 1;
-	    col -= 1;
-	}
-	if(moveable(col+1,row-1)){
-	    maze[row][col] = '.';
-	    row -= 1;
-	    col += 1;
-	}
-	Node n = new Node(col, row);
-	placesToGo.add();
-	
 	return false;
     }    
      
     private boolean moveable(int row, int col){
-	Char c = maze[row][col];
+	char c = maze[row][col];
 	return c == ' ' || c == 'E';
     }
 
@@ -146,5 +156,61 @@ public class BetterMaze{
 		startRow = i / maxc;
 	    }
 	}
+    }
+
+
+
+
+
+
+
+    private static final String CLEAR_SCREEN =  "\033[2J";
+    private static final String HIDE_CURSOR =  "\033[?25l";
+    private static final String SHOW_CURSOR =  "\033[?25h";
+    private String go(int x,int y){
+	return ("\033[" + x + ";" + y + "H");
+    }
+    private String color(int foreground,int background){
+	return ("\033[0;" + foreground + ";" + background + "m");
+    }
+
+    public void clearTerminal(){
+	System.out.println(CLEAR_SCREEN);
+    }
+
+    public void wait(int millis){
+	try {
+	    Thread.sleep(millis);
+	}
+	catch (InterruptedException e) {
+	}
+    }
+
+
+    public String toString(){
+	int maxr = maze.length;
+	int maxc = maze[0].length;
+	String ans = "";
+	if(animate){
+	    ans = "Solving a maze that is " + maxr + " by " + maxc + "\n";
+	}
+	for(int i = 0; i < maxc * maxr; i++){
+	    if(i % maxc == 0 && i != 0){
+		ans += color(37,40) + "\n";
+	    }
+	    char c =  maze[i / maxc][i % maxc];
+	    if(c == '#'){
+		ans += color(38,47)+c;
+	    }else{
+		ans += color(33,40)+c;
+	    }
+	}
+	//nice animation string
+	if(animate){
+	    return HIDE_CURSOR + go(0,0) + ans + color(37,40) +"\n"+ SHOW_CURSOR + color(37,40);
+	}else{
+	    return ans + color(37,40) + "\n";
+	}
+    } 
     
 }
