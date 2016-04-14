@@ -49,8 +49,8 @@ public class BetterMaze{
         /** IMPLEMENT THIS **/
 	ArrayList<Integer>data = new ArrayList<Integer>();
 	while(end != null){
-	    data.add(end.getRow());
 	    data.add(end.getCol());
+	    data.add(end.getRow());
 	    end = end.getPrev();
 	}
 	solution = new int[data.size()];
