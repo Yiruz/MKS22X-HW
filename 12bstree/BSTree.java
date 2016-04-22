@@ -1,14 +1,15 @@
-public class BSTree<T extends comparable<T>>{
+
+public class BSTree<T extends Comparable<T>>{
     Node root;
 
     public class Node{
 	Node left, right;
 	T data;
 
-	public Node(T d, Node l, Node r){
+	public Node(T d){
 	    data = d;
-	    left = l;
-	    right = r;
+	    //left = l;
+	    //right = r;
 	}
 	public T getData(){
 	    return data;
@@ -29,13 +30,25 @@ public class BSTree<T extends comparable<T>>{
 	    right = r;
 	}
 	public String toString(){
-	    String s = "";
+	    /*   if(left == null && right == null){
+		return data + " "+"_"+" "+"_";
+	    }else if(left==null){
+		return data + " "+"_"+right.toString();
+	    }else if(right == null){
+		return data + left.toString()+" "+"_";
+	    }else{
+		return data + " "+left.toString()+" "+right.toString();
+		}*/
+	    String s = data + " ";
 	    if(left != null){
-		s+=left.toString();
+		s += left.toString();
+	    }else{
+		s += "_";
 	    }
-	    s+=data+" ";
 	    if(right != null){
-		s+=right.toString();
+		s += right.toString();
+	    }else{
+		s += "_";
 	    }
 	    return s;
 	}
@@ -48,15 +61,27 @@ public class BSTree<T extends comparable<T>>{
 	    }
 	    return h;
 	}
+	//when they are equal?
 	public void add(T value){
-	    if(data.compareTo(value)<0){
-		Node n = new Node(value,null,null);
+	    if(value.compareTo(data) < 0){
+		if(left == null){
+		    left = new Node(value);
+		}else{
+		    left.add(value);
+       		}
+	    }
+	    if(value.compareTo(data) > 0){
+		if(right == null){
+		    right = new Node(value);
+		}else{
+		    right.add(value);
+		}
 	    }
 	}
 	public boolean contains(T value){
-	    if(data < value){
+	    // if(value.compareTo){
 		
-	    }
+	    // }
 	    return false;
 	}
     }
