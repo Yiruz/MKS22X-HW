@@ -28,15 +28,6 @@ public class BSTree<T extends Comparable<T>>{
 	    right = r;
 	}
 	public String toString(){
-	    /*   if(left == null && right == null){
-		return data + " "+"_"+" "+"_";
-	    }else if(left==null){
-		return data + " "+"_"+right.toString();
-	    }else if(right == null){
-		return data + left.toString()+" "+"_";
-	    }else{
-		return data + " "+left.toString()+" "+right.toString();
-		}*/
 	    String s = data + " ";
 	    if(left != null){
 		s += left.toString();
@@ -51,13 +42,18 @@ public class BSTree<T extends Comparable<T>>{
 	    return s;
 	}
 	public int height(){
-	    int h = 0;
-	    if(left==null && right==null){
-		h = 1;
-	    }else{
-		h = 1+Math.max(left.height(),right.height());
+	    int lefth = 0;
+	    int righth = 0;
+	    if(left == null && right == null){
+		return 1;
 	    }
-	    return h;
+	    if(left != null){
+		lefth += left.height();
+	    }
+	    if(right != null){
+		righth += right.height();
+	    }
+	    return 1 + Math.max(lefth,righth);
 	}
 	//when they are equal?
 	public void add(T value){
@@ -114,6 +110,13 @@ public class BSTree<T extends Comparable<T>>{
 	    return false;
 	}else{
 	    return root.contains(value);
+	}
+    }
+    public int height(){
+	if(root == null){
+	    return 0;
+	}else{
+	    return root.height();
 	}
     }
 }
