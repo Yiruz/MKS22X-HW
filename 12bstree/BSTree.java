@@ -41,12 +41,12 @@ public class BSTree<T extends Comparable<T>>{
 	    if(left != null){
 		s += left.toString();
 	    }else{
-		s += "_";
+		s += "_ ";
 	    }
 	    if(right != null){
 		s += right.toString();
 	    }else{
-		s += "_";
+		s += "_ ";
 	    }
 	    return s;
 	}
@@ -88,12 +88,19 @@ public class BSTree<T extends Comparable<T>>{
 	}
     }
 
+    public BSTree(){
+	root = null;
+    }
     public BSTree(T val){
 	root = new Node(val);
     }
 
     public void add(T val){
-	root.add(val);
+	if(root == null){
+	    root = new Node(val);
+	}else{
+	    root.add(val);
+	}
     }
     public String toString(){
 	if(root == null){
