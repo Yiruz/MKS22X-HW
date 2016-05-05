@@ -8,8 +8,6 @@ public class BSTree<T extends Comparable<T>>{
 
 	public Node(T d){
 	    data = d;
-	    //left = l;
-	    //right = r;
 	}
 	public T getData(){
 	    return data;
@@ -65,24 +63,50 @@ public class BSTree<T extends Comparable<T>>{
 	public void add(T value){
 	    if(value.compareTo(data) < 0){
 		if(left == null){
-		    left = new Node(value);
+		    setLeft(new Node(value));
 		}else{
 		    left.add(value);
        		}
 	    }
 	    if(value.compareTo(data) > 0){
 		if(right == null){
-		    right = new Node(value);
+		    setRight(new Node(value));
 		}else{
 		    right.add(value);
 		}
 	    }
 	}
 	public boolean contains(T value){
-	    // if(value.compareTo){
-		
-	    // }
+	    if(data.compareTo(value) == 0){
+		return true;
+	    }else if(data.compareTo(value) > 0 && left != null){
+		return left.contains(value);
+	    }else if(right != null){
+		return right.contains(value);
+	    }
 	    return false;
+	}
+    }
+
+    public BSTree(T val){
+	root = new Node(val);
+    }
+
+    public void add(T val){
+	root.add(val);
+    }
+    public String toString(){
+	if(root == null){
+	    return "";
+	}else{
+	    return root.toString();
+	}
+    }
+    public boolean contains(T value){
+	if(root == null){
+	    return false;
+	}else{
+	    return root.contains(value);
 	}
     }
 }
