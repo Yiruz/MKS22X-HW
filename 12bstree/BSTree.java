@@ -79,9 +79,9 @@ public class BSTree<T extends Comparable<T>>{
 	    }
 	}
 	public boolean contains(T value){
-	    // if(value.compareTo){
+	     if(value.compareTo){
 		
-	    // }
+	     }
 	    return false;
 	}
     }
