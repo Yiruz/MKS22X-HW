@@ -3,34 +3,42 @@ import java.util.*;
 public class MyHeap<T extends Comparable<T>>{
     private T[] data;
     private int size;
-    private boolean isMax;
+    private boolean max;
 
     public MyHeap(){
-	data = new T[1];
+	data = (T[])new Comparable[1];
     }
     public MyHeap(T[] ary){
-	data = new T[ary.length];
+	data = (T[])new Comparable[ary.length];
 	for(int i=1; i<ary.length; i++){
 	    data[i] = ary[i];
 	}
+	size = ary.length;
     }
     /*public MyHeap(boolean isMax){
-	this.isMax = isMax;
+	max = isMax;
     }
     public MyHeap(T[] ary, boolean isMax){
 	
     }*/
 
     private void pushDown(int k){
-	if(data[k].compareTo(data[k/2]) > 0){
-	    
-	}
+	T temp = data[k];
+	data[k] = data[k*2];
+	data[k*2] = temp;
     }
     private void pushUp(int k){
-
+	T temp = data[k];
+	data[k] = data[k/2];
+	data[k/2] = temp;
     }
     private void heapify(){
-
+	for(int i=0; i<data.length/2; i++){
+	    if(data[i].compareTo(data[i*2]) > 0 ||
+	       data[i].compareTo(data[i*2+1]) > 0){
+		pushDown(i);
+	    }
+	}
     }
     public T delete(){
 	return data[0];
@@ -39,7 +47,12 @@ public class MyHeap<T extends Comparable<T>>{
 	
     }
     private void doubleSize(){
-	
+	size *= 2;
+	T[] temp = (T[])new Comparable(size);
+	for(int i=0; i<data.length; i++){
+	    temp[i] = data[i];
+	}
+	data = temp;
     }
     public String toString(){
 	return "";
