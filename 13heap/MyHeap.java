@@ -57,11 +57,18 @@ public class MyHeap<T extends Comparable<T>>{
 	if(size == 0){
 	    throw new NoSuchElementException();
 	}
+	T temp = data[1];
+	for(int i=1; i<size; i++){
+	    data[i] = data[i+1];
+	}
+	data[size+1] = 0;
 	size--;
-	return data[0];
+	return temp;
     }
     public void add(T x){
-	
+	data[size+1] = x;
+	pushUp(x);
+	size++;
     }
     private void doubleSize(){
 	size *= 2;
