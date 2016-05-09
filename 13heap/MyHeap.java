@@ -7,6 +7,7 @@ public class MyHeap<T extends Comparable<T>>{
 
     public MyHeap(){
 	data = (T[])new Comparable[1];
+	size = 0;
     }
     public MyHeap(T[] ary){
 	data = (T[])new Comparable[ary.length];
@@ -23,24 +24,40 @@ public class MyHeap<T extends Comparable<T>>{
     }*/
 
     private void pushDown(int k){
-	T temp = data[k];
-	data[k] = data[k*2];
-	data[k*2] = temp;
-    }
-    private void pushUp(int k){
-	T temp = data[k];
-	data[k] = data[k/2];
-	data[k/2] = temp;
-    }
-    private void heapify(){
-	for(int i=0; i<data.length/2; i++){
-	    if(data[i].compareTo(data[i*2]) > 0 ||
-	       data[i].compareTo(data[i*2+1]) > 0){
-		pushDown(i);
+	if(data[k].compareTo(data[k*2])<0 || data[k].compareTo(data[k*2+1])<0){
+	    if(data[k*2] > data[k*2+1]){
+		T temp = data[k];
+		data[k] = data[k*2];
+		data[k*2] = temp;
+	    }else{
+		T temp = data[k];
+		data[k] = data[k*2+1];
+		data[k*2+1] = temp;
 	    }
 	}
     }
+    private void pushUp(int k){
+	if(data[k].compareTo(data[k/2])>0 || data[k].compareTo(data[k/2+1])>0){	
+	    if(data[k/2] < data[k/2+1]){
+		T temp = data[k];
+		data[k] = data[k/2];
+		data[k/2] = temp;
+	    }else{
+		T temp = data[k];
+		data[k] = data[k/2+1];
+		data[k/2+1] = temp;
+	    }
+    }
+    private void heapify(){
+	for(int i=size/2; i>0; i--){
+	    pushDown(i);
+	}
+    }
     public T delete(){
+	if(size == 0){
+	    throw new NoSuchElementException();
+	}
+	size--;
 	return data[0];
     }
     public void add(T x){
