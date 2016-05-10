@@ -11,18 +11,15 @@ public class RunningMedian{
 
     public double getMedian(){
 	if(small.size()==0 && big.size()==0){
-	    throw new NoSuchElementException();
+	    throw new NoSuchElementException("There are no elements.");
 	}
-	if(small.size() == big.size()){
-	    return (small.peek()+big.peek())/2;
-	} 
 	if(small.size() > big.size()){
 	    return small.peek();
 	}
 	if(small.size() < big.size()){
 	    return big.peek();
 	}
-	return 0;
+	return (small.peek()+big.peek())/2;
     }
     public void add(Integer x){
 	if(x < getMedian()){
