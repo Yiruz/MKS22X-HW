@@ -22,11 +22,18 @@ import java.util.*;
 	heapify();
     }
     public MyHeap(boolean isMax){
+	data = (T[])new Comparable[10];
+	size = 0;
 	max = isMax;
     }
     public MyHeap(T[] ary, boolean isMax){
-	this(ary);
+	size = ary.length;
+	data = (T[])new Comparable[size+1];
+	for(int i=0; i<ary.length; i++){
+	    data[i+1] = ary[i];
+	}
 	max = isMax;
+	heapify();
     }
     private void swap(int a, int b){
 	T temp = data[a];
@@ -36,13 +43,27 @@ import java.util.*;
 
     private void pushDown(int k){
 	if(k*2+1 <= size){
-	    if(compare(k,k*2) ||  compare(k,k*2+1)){	
-		if(compare(k*2,k*2+1)){
-		    swap(k, k*2+1);
-		    pushDown(k*2+1);
-		}else{
-		    swap(k, k*2);
-		    pushDown(k*2);
+	    if(max){
+		if(data[k].compareTo(data[k*2]) < 0 || 
+		   data[k].compareTo(data[k*2+1]) < 0){	
+		    if(data[k*2].compareTo(data[k*2+1]) > 0){
+			swap(k, k*2);
+			pushDown(k*2);
+		    }else{
+			swap(k, k*2+1);
+			pushDown(k*2+1);
+		    }
+		}
+	    }else{
+		if(data[k].compareTo(data[k*2+1]) > 0 ||
+		   data[k].compareTo(data[k*2]) > 0){
+		    if(data[k*2].compareTo(data[k*2+1]) > 0){
+			swap(k, k*2+1);
+			pushDown(k*2+1);
+		    }else{			
+			swap(k, k*2);
+			pushDown(k*2);
+		    }
 		}
 	    }
 	    if(debug){
