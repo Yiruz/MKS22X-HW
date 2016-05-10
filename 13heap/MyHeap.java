@@ -54,7 +54,7 @@ import java.util.*;
 
     private void pushUp(int k){
 	if(k/2 >= 1){
-	    if(compare(k,k/2)){	
+	    if(compare(k/2,k)){	
 		swap(k, k/2);
 		pushUp(k/2);
 	    }
@@ -87,13 +87,12 @@ import java.util.*;
 	if(data.length <= size+1){
 	    doubleSize();
 	}
-	data[size] = x;
-	pushUp(size);
+	data[size+1] = x;
+	pushUp(size+1);
 	size++;
     }
     private void doubleSize(){
-	size *= 2;
-	T[] temp = (T[])new Comparable[size];
+	T[] temp = (T[])new Comparable[data.length*2];
 	for(int i=0; i<data.length; i++){
 	    temp[i] = data[i];
 	}
