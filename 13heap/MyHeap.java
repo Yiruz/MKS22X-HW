@@ -75,9 +75,16 @@ import java.util.*;
 
     private void pushUp(int k){
 	if(k/2 >= 1){
-	    if(compare(k/2,k)){	
-		swap(k, k/2);
-		pushUp(k/2);
+	    if(max){
+		if(data[k].compareTo(data[k/2]) > 0){
+		    swap(k, k/2);
+		    pushUp(k/2);
+		}
+	    }else{
+		if(data[k].compareTo(data[k/2]) < 0){
+		    swap(k, k/2);
+		    pushUp(k/2);
+		}
 	    }
 	}
     }
