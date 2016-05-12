@@ -3,6 +3,7 @@ import java.util.*;
 public class RunningMedian{
     private MyHeap<Integer> small;
     private MyHeap<Integer> big;
+    boolean debug = true;
 
     public RunningMedian(){
 	small = new MyHeap<Integer>();
@@ -19,14 +20,26 @@ public class RunningMedian{
 	if(small.size() < big.size()){
 	    return big.peek();
 	}
-	return (small.peek()+big.peek())/2;
+	return (small.peek()+big.peek())/2.0;
     }
     public void add(Integer x){
+	if(small.size() == 0 && big.size() == 0){
+	  small.add(x);
+	}else
 	if(x < getMedian()){
 	    small.add(x);
-	}
-	if(x > getMedian()){
+	}else{
 	    big.add(x);
+	}
+	if(small.size() - big.size() > 1){
+	    big.add(small.delete());
+	}
+	if(big.size() - small.size() > 1){
+	    small.add(big.delete());
+	}
+	if(debug){
+	    System.out.println("small:\t"+small);
+	    System.out.println("big:\t"+big);
 	}
     }
 }
