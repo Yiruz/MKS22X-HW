@@ -5,7 +5,7 @@ import java.util.*;
     private T[] data;
     private int size;
     private boolean max;
-    private boolean debug = true;
+    private boolean debug = false;
 
     public MyHeap(){
 	data = (T[])new Comparable[10];

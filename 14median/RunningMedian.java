@@ -3,7 +3,7 @@ import java.util.*;
 public class RunningMedian{
     private MyHeap<Integer> small;
     private MyHeap<Integer> big;
-    boolean debug = true;
+    boolean debug = false;
 
     public RunningMedian(){
 	small = new MyHeap<Integer>();
