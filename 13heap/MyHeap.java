@@ -104,10 +104,12 @@ import java.util.*;
 	    throw new NoSuchElementException();
 	}
 	T temp = data[1];
-	for(int i=1; i<size+1; i++){
+	/*for(int i=1; i<size+1; i++){
 	    data[i] = data[i+1];
 	}
-	data[size] = null;
+	data[size] = null;*/
+	data[1] = data[size];
+	pushDown(1);
 	size--;
 	return temp;
     }
@@ -136,11 +138,5 @@ import java.util.*;
 	//return Arrays.toString(data);
     }
 
-    private boolean compare(int a, int b){
-	if(max){
-	    return data[a].compareTo(data[b]) > 0; 
-	}else{
-	    return data[a].compareTo(data[b]) < 0; 
-	}
-    }
+
 }
